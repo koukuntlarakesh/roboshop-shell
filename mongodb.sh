@@ -28,7 +28,8 @@ VALIDATE()
     {
         echo -e " $2 ..... $G ERROR $N "
     }
-    else{
+    else
+    {
         echo -e " $2 ..... $G SUCCESS $N "
     }
     fi
