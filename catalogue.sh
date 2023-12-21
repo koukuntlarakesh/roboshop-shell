@@ -35,22 +35,35 @@ VALIDATE()
     fi
 }
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>LOGFILE
 VALIDATE $?  "Disabling Nodejs"
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>>LOGFILE
 VALIDATE $?  "Enabling Nodejs"
-dnf install nodejs -y
+dnf install nodejs -y &>>LOGFILE
 VALIDATE $?  "Installing Node Js"
-useradd roboshop
+useradd roboshop &>>LOGFILE
 VALIDATE $? "Creating user"
-mkdir /app
+mkdir /app &>>LOGFILE
 VALIDATE $? "created directory"
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
-cd /app  
+cd /app  &>>LOGFILE
 VALIDATE $? "Moving to app directory"
-unzip /tmp/catalogue.zip 
+unzip /tmp/catalogue.zip &>>LOGFILE
 VALIDATE $? "Extracting zip file"
-npm install  
+npm install &>>LOGFILE
 VALIDATE $? "Running npm install in the project folder"
-
+cp /home/centos/roboshop-shell/catalogue.service  /etc/systemd/system/catalogue.service &>>LOGFILE
+VALIDATE $? "copying is done" 
+systemctl daemon-reload &>>LOGFILE
+VALIDATE $? "reload catalogue service" 
+systemctl enable catalogue &>>LOGFILE
+VALIDATE $? "Enable catalogue service"
+systemctl start catalogue &>>LOGFILE
+VALIDATE $? "Starting catalogue service"
+cp /home/centos/roboshop-shell/mongod.repo  /etc/yum.repos.d/mongo.repo &>>LOGFILE
+VALIDATE $? "copying mongod"
+dnf install mongodb-org-shell -y &>>LOGFILE
+VALIDATE $? "install mongo shell"
+mongo --host mongod.koukuntla.online </app/schema/catalogue.js &>>LOGFILE
+VALIDATE $? "creating database and collections"
