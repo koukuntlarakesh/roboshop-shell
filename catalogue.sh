@@ -44,9 +44,9 @@ dnf install nodejs -y &>>LOGFILE
 VALIDATE $?  "Installing Node Js"
 
 #useradd roboshop &>>LOGFILE
-VALIDATE $? "Creating user"
-mkdir /app &>>LOGFILE
-VALIDATE $? "created directory"
+#VALIDATE $? "Creating user"
+#mkdir /app &>>LOGFILE
+#VALIDATE $? "created directory"
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
 cd /app  &>>LOGFILE
