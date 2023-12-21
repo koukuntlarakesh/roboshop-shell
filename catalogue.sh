@@ -42,7 +42,8 @@ dnf module enable nodejs:18 -y &>>LOGFILE
 VALIDATE $?  "Enabling Nodejs"
 dnf install nodejs -y &>>LOGFILE
 VALIDATE $?  "Installing Node Js"
-useradd roboshop &>>LOGFILE
+
+#useradd roboshop &>>LOGFILE
 VALIDATE $? "Creating user"
 mkdir /app &>>LOGFILE
 VALIDATE $? "created directory"
