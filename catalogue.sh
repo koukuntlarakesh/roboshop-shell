@@ -26,7 +26,8 @@ VALIDATE()
     if [ $1 -ne 0 ] 
     then
     {
-        echo -e " $2 ..... $G ERROR $N "
+        echo -e " $2 ..... $R ERROR $N "
+        exit 1
     }
     else
     {
