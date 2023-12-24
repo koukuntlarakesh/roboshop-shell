@@ -53,7 +53,7 @@ else
 {
     echo -e "User roboshop already exists.. $Y Skipping...$N"
 }
-
+fi
 
 mkdir /app &>>LOGFILE
 VALIDATE $? "created directory"
