@@ -51,31 +51,31 @@ then
 }
 else
 {
-    echo -e "User roboshop already exists.. $Y Skipping...$N"
+    echo -e "User roboshop already exists.. $Y Skipping...$N "
 }
-
+fi
 
 mkdir /app &>>LOGFILE
 VALIDATE $? "created directory"
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>LOGFILE
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
 cd /app  &>>LOGFILE
 VALIDATE $? "Moving to app directory"
-unzip /tmp/catalogue.zip &>>LOGFILE
+unzip /tmp/user.zip &>>LOGFILE
 VALIDATE $? "Extracting zip file"
 npm install &>>LOGFILE
 VALIDATE $? "Running npm install in the project folder"
-cp /home/centos/roboshop-shell/catalogue.service  /etc/systemd/system/catalogue.service &>>LOGFILE
+cp /home/centos/roboshop-shell/user.service  /etc/systemd/system/user.service &>>LOGFILE
 VALIDATE $? "copying is done" 
 systemctl daemon-reload &>>LOGFILE
-VALIDATE $? "reload catalogue service" 
-systemctl enable catalogue &>>LOGFILE
-VALIDATE $? "Enable catalogue service"
-systemctl start catalogue &>>LOGFILE
-VALIDATE $? "Starting catalogue service"
+VALIDATE $? "reload user service" 
+systemctl enable user &>>LOGFILE
+VALIDATE $? "Enable user service"
+systemctl start user &>>LOGFILE
+VALIDATE $? "Starting user service"
 cp /home/centos/roboshop-shell/mongo.repo  /etc/yum.repos.d/mongo.repo &>>LOGFILE
 VALIDATE $? "copying mongod"
 dnf install mongodb-org-shell -y &>>LOGFILE
 VALIDATE $? "install mongo shell"
-mongo --host mongod.koukuntla.online </app/schema/catalogue.js &>>LOGFILE
+mongo --host mongod.koukuntla.online </app/schema/user.js &>>LOGFILE
 VALIDATE $? "creating database and collections"

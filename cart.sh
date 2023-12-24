@@ -46,36 +46,31 @@ id roboshop
 if [ $? -ne 0]
 then 
 {
-    useradd roboshop 
+    useradd roboshop &>>LOGFILE
     VALIDATE $?  "Creating User roboshop"
 }
 else
 {
-    echo -e "User roboshop already exists.. $Y Skipping...$N"
+    echo -e "User roboshop already exists.. $Y Skipping...$N "
 }
-
+fi
 
 mkdir /app &>>LOGFILE
 VALIDATE $? "created directory"
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>LOGFILE
+curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
 cd /app  &>>LOGFILE
 VALIDATE $? "Moving to app directory"
-unzip /tmp/catalogue.zip &>>LOGFILE
+unzip /tmp/cart.zip &>>LOGFILE
 VALIDATE $? "Extracting zip file"
 npm install &>>LOGFILE
 VALIDATE $? "Running npm install in the project folder"
-cp /home/centos/roboshop-shell/catalogue.service  /etc/systemd/system/catalogue.service &>>LOGFILE
+cp /home/centos/roboshop-shell/cart.service  /etc/systemd/system/cart.service &>>LOGFILE
 VALIDATE $? "copying is done" 
 systemctl daemon-reload &>>LOGFILE
-VALIDATE $? "reload catalogue service" 
-systemctl enable catalogue &>>LOGFILE
-VALIDATE $? "Enable catalogue service"
-systemctl start catalogue &>>LOGFILE
-VALIDATE $? "Starting catalogue service"
-cp /home/centos/roboshop-shell/mongo.repo  /etc/yum.repos.d/mongo.repo &>>LOGFILE
-VALIDATE $? "copying mongod"
-dnf install mongodb-org-shell -y &>>LOGFILE
-VALIDATE $? "install mongo shell"
-mongo --host mongod.koukuntla.online </app/schema/catalogue.js &>>LOGFILE
-VALIDATE $? "creating database and collections"
+VALIDATE $? "reload cart service" 
+systemctl enable cart &>>LOGFILE
+VALIDATE $? "Enable cart service"
+systemctl start cart &>>LOGFILE
+VALIDATE $? "Starting cart service"
+
