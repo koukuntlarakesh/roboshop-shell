@@ -51,6 +51,6 @@ VALIDATE $? "extracting front end content"
 unzip /tmp/web.zip &>>LOGFILE
 VALIDATE $? "Extracting zip file"
  cp /home/centos/roboshop-shell/roboshop.conf  /etc/nginx/default.d/roboshop.conf &>>LOGFILE
- VALIDATE "Nginx configuration "
- systemctl restart nginx   
+ VALIDATE $? "Nginx configuration "
+ systemctl restart nginx &>>LOGFILE
  VALIDATE $? "Restarting the nginx"
