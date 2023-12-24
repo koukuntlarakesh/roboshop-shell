@@ -54,8 +54,19 @@ else
     echo -e "User roboshop already exists.. $Y Skipping...$N "
 }
 fi
-
-mkdir /app &>>LOGFILE
+id app
+if [ $? -ne 0 ] 
+then 
+{
+    useradd roboshop &>>LOGFILE
+    VALIDATE $?  "Creating User roboshop"
+}
+else
+{
+    echo -e "User roboshop already exists.. $Y Skipping...$N "
+}
+fi
+mkdir app &>>LOGFILE
 VALIDATE $? "created directory"
 curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
