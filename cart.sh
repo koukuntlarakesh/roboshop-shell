@@ -55,8 +55,16 @@ else
 }
 fi
 
-mkdir /app &>>LOGFILE
-VALIDATE $? "created directory"
+if [ ! -d "app" ]; then
+{
+    mkdir /app
+    VALIDATE $? "Directory created"
+}
+else
+{
+  echo "already exists"
+}
+fi
 curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
 cd /app  &>>LOGFILE
