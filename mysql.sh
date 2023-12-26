@@ -38,7 +38,7 @@ VALIDATE()
 
 dnf module disable mysql -y &>>LOGFILE
 VALIDATE $? "Disabling MySQL Module"
-cd mysql.repo  /etc/yum.repos.d/mysql.repo &>>LOGFILE
+cp mysql.repo  /etc/yum.repos.d/mysql.repo &>>LOGFILE
 VALIDATE $? "Repo file Setup"
 dnf install mysql-community-server -y &>>LOGFILE
 VALIDATE $? "MySQL Server Installation"
