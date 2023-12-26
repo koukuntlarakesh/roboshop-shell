@@ -39,7 +39,7 @@ VALIDATE()
 dnf install python36 gcc python3-devel -y &>>LOGFILE
 VALIDATE $? "Install python"
 Id roboshop
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
 {
     useradd roboshop &>>LOGFILE
