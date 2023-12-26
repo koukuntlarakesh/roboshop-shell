@@ -50,7 +50,7 @@ else
     echo -e "User already exits $Y Skipping...$N "
 }
 fi
-mkdir app &>>LOGFILE
+mkdir /app &>>LOGFILE
 VALIDATE $? "creating app directory"
 curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>>LOGFILE
 VALIDATE $? "downloading payment file"
