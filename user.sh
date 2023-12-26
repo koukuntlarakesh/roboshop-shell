@@ -55,7 +55,7 @@ else
 }
 fi
 
-mkdir app &>>LOGFILE
+mkdir /app  &>>LOGFILE
 VALIDATE $? "created directory"
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
