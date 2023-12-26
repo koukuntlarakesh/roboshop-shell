@@ -59,7 +59,7 @@ mkdir app &>>LOGFILE
 VALIDATE $? "created directory"
 curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>LOGFILE
 VALIDATE $? "Downloading application code"
-cd /app  &>>LOGFILE
+cd app  &>>LOGFILE
 VALIDATE $? "Moving to app directory"
 unzip /tmp/cart.zip &>>LOGFILE
 VALIDATE $? "Extracting zip file"
