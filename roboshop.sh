@@ -7,11 +7,13 @@ INSTANCES=("web" "cart" "user" "catalogue" "payment" "dispatch" "rabitmq" "shipp
 
 for i in "${INSTANCES[@]}"
 do
+    echo "Instance $i is creating"
    if [ $i == "mongod" ] || [ $i == "mysql" ]||[ $i == "shipping" ]
    then
       INSTANCE_TYPE=t3.small
    else
       INSTANCE_TYPE=t2.micro
    fi
-   aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY --tag-specifications "ResourceType=instance,Tags=[{Key=webserver,Value=$i}]" 
+   aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY --tag-specifications  "ResourceType=instance,Tags=[{Key=webserver,Value=$i}]" 
+   echo " Instance $i is created done......"
 done
