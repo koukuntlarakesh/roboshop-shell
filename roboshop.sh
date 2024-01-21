@@ -16,7 +16,7 @@ do
    else
       INSTANCE_TYPE=t2.micro
    fi
-     PRIVATE_IP_ADD=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY --tag-specifications "ResourceType=instance,Tags=[{Key=webserver,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text) 
-        
+     PRIVATE_IP_ADD=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text) 
+                                                                                 
    echo " Instance $i:$PRIVATE_IP_ADD"
 done
