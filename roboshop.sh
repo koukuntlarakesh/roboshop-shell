@@ -3,7 +3,7 @@
 AMI=ami-0f3c7d07486cad139
 SECURITY=sg-07e9d7ca57c23e404
 
-INSTANCES=("web" "cart" "user" "catalogue" "payment" "dispatch" "rabitmq" "shipping" "mongodb" "mysql" "redis")
+INSTANCES=("web" "cart" "user" "catalogue" "payment" "dispatch" "rabbitmq" "shipping" "mongodb" "mysql" "redis")
 ZONE_ID=Z10166981HVD67IZDDVJN
 DOMAIN_NAME=koukuntla.online
 
